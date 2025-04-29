@@ -1,0 +1,26 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+h1, h2 {
+    color: red;
+}
+a {
+    color: red;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 5px;
+}
+ul {
+    margin-left: 20px;
+}

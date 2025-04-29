@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rólam</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="site.css">
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container3 {
+            text-align: center;
+        }
+        .profile-card {
+            background: linear-gradient(135deg, #ff0000, #660000);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            max-width: 700px;
+            margin: auto;
+        }
+        h1 {
+            color: #ff4444;
+        }
+        p {
+            font-size: 18px;
+        }
+        .delete-link, .change-password-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .delete-link {
+            background-color: #cc0000;
+        }
+        .delete-link:hover {
+            background-color:  #cc0000;
+        }
+        .change-password-link {
+            background-color:  #cc0000;
+            margin-left: 10px;
+        }
+        .change-password-link:hover {
+            background-color:  #cc0000;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo.webp" alt="Logo" width="50px" height="50px"></a>
+            <a class="logo" href="index.html">REDGOLD MARKETS</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="arfolyamfigyelo.html">Árfolyamfigyelő</a></li>
+                <li><a href="news.html">Hírek</a></li>
+                <li><a href="portfoliokezelo.html">Portfóliókezelés</a></li>
+                <li><a href="edgeal.html">EdgeAl</a></li>
+                <li><a href="közzösseg.html">Közösségi Fórum</a></li>
+                <li><a href="rolam.html"><b>Fiókom</b></a></li>
+                
+                <li><a href="index.html"><b>BELÉPÉS</b></a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="container3">
+        <h1>Rólam</h1> <br>
+        <div class="profile-card">
+            <p><strong>Név:</strong> <span id="fullname">Betöltés...</span></p> <br>
+            <p><strong>Felhasználónév:</strong> <span id="name">KissPeter</span></p> <br>
+            <p><strong>Email:</strong> <span id="email">Betöltés...</span></p> <br>
+            
+            <p><strong>Előfizetés státusza:</strong> <span id="email">Aktív</span></p> <br>
+            <p><strong>Kereskedés állapota</strong> <span id="email"><p style="color: green;"><b>POZITÍV</b></p></span></p> <br>
+            <p><strong>Pozitív kereskedések száma:</strong> <span id="email">5 alkalom</span></p> <br>
+            <p><strong>Negatív kereskedések száma:</strong> <span id="email"> 2 alkalommal</span></p> <br>
+            <p><strong>Utolsó bejelentkezés dátuma</strong> <span id="belepes"><br><p>2025.04.29.</p></span></p> <br>
+            <a href="#" class="delete-link" onclick="deleteAccount()">Fiók törlése</a>
+            <a href="#" class="change-password-link" onclick="changePassword()">Jelszó megváltoztatása</a>
+        </div>
+    </div>
+
+    <script>
+        const userData = {
+            fullname: "Kiss Péter",
+            name:"KissPeter",
+            email: "peter.kiss@example.com"
+        };
+
+        document.getElementById("fullname").textContent = userData.fullname;
+        document.getElementById("email").textContent = userData.email;
+
+        function deleteAccount() {
+            if (confirm("Biztosan törölni szeretnéd a fiókodat? Ez a művelet nem visszavonható!")) {
+                alert("Fiók törlésének kérelme elküldve.");
+                
+            }
+        }
+
+        function changePassword() {
+            const newPassword = prompt("Kérlek add meg az új jelszót:");
+            if (newPassword === null || newPassword.trim() === "") {
+                alert("A jelszó nem lehet üres.");
+                return;
+            }
+            const confirmPassword = prompt("Kérlek erősítsd meg az új jelszót:");
+            if (newPassword !== confirmPassword) {
+                alert("A jelszavak nem egyeznek. Kérlek próbáld újra.");
+                return;
+            }
+            
+            alert("Jelszó sikeresen megváltoztatva!");
+        }
+    </script>
+
+<!--
+<script>
+    if (sessionStorage.getItem("loggedIn") !== "true") {
+        alert("Az oldal megtekintéséhez be kell jelentkezni!");
+        window.location.href = "index.html"; 
+    }
+</script>
+
+<script>
+    function logout() {
+        sessionStorage.removeItem("loggedIn"); 
+        window.location.href = "index.html";
+    }
+</script>
+-->
+</body>
+</html>

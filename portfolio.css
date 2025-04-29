@@ -1,0 +1,63 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+#portfolio-summary {
+    width: 40%;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+    text-align: center;
+}
+
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+    display: block;
+    margin: auto;
+}
+
+#right-section {
+    width: 55%;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+}
+
+#investment-container {
+    display: none;
+}
+
+form {
+    margin-top: 15px;
+}
+
+input, button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+button {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkred;
+}

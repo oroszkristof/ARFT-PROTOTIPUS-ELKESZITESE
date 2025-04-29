@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friss Tőzsdei Hírek</title>
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+
+    
+    section {
+      padding: 2rem;
+    }
+
+    h1, h2 {
+      color: #ff4444;
+    }
+
+    .news-item {
+      background-color: #1a1a1a;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #c20000;
+      border-radius: 5px;
+    }
+
+    .news-item h3 {
+      margin-top: 0;
+      color: #ff6666;
+    }
+
+    .news-item p {
+      margin: 0.5rem 0;
+    }
+
+    .source {
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+
+    .filter-bar {
+      margin-bottom: 2rem;
+      margin-top: 30px;
+    }
+
+    .filter-bar label, .filter-bar select {
+      font-size: 1rem;
+      margin-right: 1rem;
+      color: #ff4444;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      text-align: center;
+      padding: 1rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo.webp" alt="Logo" width="50px" height="50px"></a>
+            <a class="logo" href="index.html">REDGOLD MARKETS</a>
+        </div>
+        <nav>
+          <ul>
+              <li><a href="arfolyamfigyelo.html">Árfolyamfigyelő</a></li>
+              <li><a href="news.html">Hírek</a></li>
+              <li><a href="portfoliokezelo.html">Portfóliókezelés</a></li>
+              <li><a href="edgeal.html">EdgeAl</a></li>
+              <li><a href="közzösseg.html">Közösségi Fórum</a></li>
+              <li><a href="rolam.html"><b>Fiókom</b></a></li>
+              
+              <li><a href="index.html"><b>BELÉPÉS</b></a></li>
+              
+          </ul>
+      </nav>
+    </header>
+  
+<section>
+  <div class="filter-bar">
+    <label for="filter">Szűrés:</label>
+    <select id="filter" name="filter">
+      <option>Összes</option>
+      <option>Technológia</option>
+      <option>Pénzügy</option>
+      <option>Energia</option>
+      <option>Egészségügy</option>
+    </select>
+  </div>
+
+  <div class="news-item">
+    <h3>Apple bejelentette új MI-alapú termékét</h3>
+    <p>Az Apple bemutatta új mesterséges intelligencia alapú chipjét, amely jelentős teljesítménynövekedést ígér a mobil eszközökben.</p>
+    <p class="source">Forrás: Bloomberg • 2025.04.14.</p>
+  </div>
+
+  <div class="news-item">
+    <h3>Amerikai kamatemelés – piaci reakciók</h3>
+    <p>A Fed 0,25%-kal emelte az irányadó kamatlábat, ami volatilitást idézett elő a részvénypiacokon.</p>
+    <p class="source">Forrás: Reuters • 2025.04.13.</p>
+  </div>
+
+  <div class="news-item">
+    <h3>Tesla részvények új lendületben</h3>
+    <p>A Tesla árfolyama 6%-ot emelkedett egy új akkumulátor-technológia sikeres bemutatása után.</p>
+    <p class="source">Forrás: CNBC • 2025.04.12.</p>
+  </div>
+</section>
+
+
+</body>
+</html>

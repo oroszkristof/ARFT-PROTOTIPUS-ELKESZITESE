@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfóliókezelő</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="site.css">
+    <link rel="stylesheet" href="portfolio.css">
+    <style>
+        .szimulator-gomb {
+            background-color: #000000; 
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5); 
+            transition: 0.3s;
+        }
+
+        .szimulator-gomb:hover {
+            background-color: #1a1a1a;
+            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo.webp" alt="Logo" width="50px" height="50px"></a>
+            <a class="logo" href="index.html">REDGOLD MARKETS</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="arfolyamfigyelo.html">Árfolyamfigyelő</a></li>
+                <li><a href="news.html">Hírek</a></li>
+                <li><a href="portfoliokezelo.html">Portfóliókezelés</a></li>
+                <li><a href="edgeal.html">EdgeAl</a></li>
+                <li><a href="közzösseg.html">Közösségi Fórum</a></li>
+                <li><a href="rolam.html"><b>Fiókom</b></a></li>
+                
+                <li><a href="index.html"><b>BELÉPÉS</b></a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+
+   
+    <main>
+        <section id="portfolio-summary">
+            <h2>Portfólió összetétele</h2>
+            <canvas id="portfolioChart"></canvas>
+        </section>
+
+        <section id="right-section">
+            <section id="investment-list">
+                <h2>Befektetési jegyek</h2> <br>
+                <ul id="investment-container"></ul>
+            </section>
+
+            
+        </section>
+    </main>
+    <button class="szimulator-gomb" onclick="location.href='szimulator.html'">
+        Befektetési szimulátor indítása
+    </button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById("portfolioChart").getContext("2d");
+
+            let portfolioData = {
+                labels: ["AAPL"],
+                datasets: [{
+                    label: "Portfólió megoszlás",
+                    data: [10],
+                    backgroundColor: ["#FF5733"]
+                }]
+            };
+
+            let portfolioChart = new Chart(ctx, {
+                type: "pie",
+                data: portfolioData
+            });
+
+            let investmentContainer = document.getElementById("investment-container");
+            investmentContainer.style.display = "block";
+
+            let listItem = document.createElement("li");
+            listItem.textContent = `AAPL – 10 db`;
+            listItem.setAttribute("data-asset", "AAPL");
+            listItem.setAttribute("data-quantity", "10");
+            investmentContainer.appendChild(listItem);
+
+            document.getElementById("buy-btn").addEventListener("click", function () {
+                let asset = document.getElementById("asset").value.toUpperCase();
+                let quantity = parseFloat(document.getElementById("quantity").value);
+
+                if (!asset || quantity <= 0) {
+                    alert("Érvényes eszközt és mennyiséget adj meg!");
+                    return;
+                }
+
+                let existingItem = document.querySelector(`#investment-container li[data-asset="${asset}"]`);
+                if (existingItem) {
+                    let oldQuantity = parseFloat(existingItem.getAttribute("data-quantity"));
+                    let newQuantity = oldQuantity + quantity;
+                    existingItem.textContent = `${asset} – ${newQuantity} db`;
+                    existingItem.setAttribute("data-quantity", newQuantity);
+                } else {
+                    let listItem = document.createElement("li");
+                    listItem.textContent = `${asset} – ${quantity} db`;
+                    listItem.setAttribute("data-asset", asset);
+                    listItem.setAttribute("data-quantity", quantity);
+                    investmentContainer.appendChild(listItem);
+                }
+
+                if (!portfolioData.labels.includes(asset)) {
+                    portfolioData.labels.push(asset);
+                    portfolioData.datasets[0].data.push(quantity);
+                    portfolioData.datasets[0].backgroundColor.push("#C70039");
+                } else {
+                    let index = portfolioData.labels.indexOf(asset);
+                    portfolioData.datasets[0].data[index] += quantity;
+                }
+
+                portfolioChart.update();
+
+                alert(`${quantity} db ${asset} sikeresen megvásárolva!`);
+            });
+        });
+    </script>
+
+    <!--
+<script>
+    
+    if (sessionStorage.getItem("loggedIn") !== "true") {
+        alert("Az oldal megtekintéséhez be kell jelentkezni!");
+        window.location.href = "index.html"; 
+    }
+</script>
+
+<script>
+    function logout() {
+        sessionStorage.removeItem("loggedIn"); 
+        window.location.href = "index.html";
+    }
+</script>
+--->
+
+</body>
+</html>

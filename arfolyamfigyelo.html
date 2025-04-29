@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árfolyamfigyelő</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="site.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #1c1c1c;
+            margin-top: 70px;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #ff0000;
+            text-align: center;
+        }
+        th {
+            background-color: #ff0000;
+            color: white;
+        }
+        .up {
+            color: #00ff00;
+        }
+        .down {
+            color: #ff4444;
+        }
+        .action-btn {
+            padding: 8px 12px;
+            margin: 2px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .buy {
+            background-color: #00cc00;
+            color: white;
+        }
+        .sell {
+            background-color: #cc0000;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="logo.webp" alt="Logo" width="50px" height="50px"></a>
+            <a class="logo" href="index.html">REDGOLD MARKETS</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="arfolyamfigyelo.html">Árfolyamfigyelő</a></li>
+                <li><a href="news.html">Hírek</a></li>
+                <li><a href="portfoliokezelo.html">Portfóliókezelés</a></li>
+                <li><a href="edgeal.html">EdgeAl</a></li>
+                <li><a href="közzösseg.html">Közösségi Fórum</a></li>
+                <li><a href="rolam.html"><b>Fiókom</b></a></li>
+                
+                <li><a href="index.html"><b>BELÉPÉS</b></a></li>
+                
+            </ul>
+        </nav>
+</header>
+    <main> 
+        <table id="stock-table">
+            <thead>
+                <tr>
+                    <th>Részvény</th>
+                    <th>Ár (HUF)</th>
+                    <th>Változás (%)</th>
+                    <th>Kereskedés</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apple Inc. (AAPL)</td>
+                    <td id="aapl-price">Betöltés...</td>
+                    <td id="aapl-change">Betöltés...</td>
+                    <td>
+                        <button class="action-btn buy" onclick="buyStock('AAPL')">Vásárlás</button>
+                        <button class="action-btn sell" onclick="sellStock('AAPL')">Eladás</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tesla Inc. (TSLA)</td>
+                    <td id="tsla-price">Betöltés...</td>
+                    <td id="tsla-change">Betöltés...</td>
+                    <td>
+                        <button class="action-btn buy" onclick="buyStock('TSLA')">Vásárlás</button>
+                        <button class="action-btn sell" onclick="sellStock('TSLA')">Eladás</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Microsoft Corp. (MSFT)</td>
+                    <td id="msft-price">Betöltés...</td>
+                    <td id="msft-change">Betöltés...</td>
+                    <td>
+                        <button class="action-btn buy" onclick="buyStock('MSFT')">Vásárlás</button>
+                        <button class="action-btn sell" onclick="sellStock('MSFT')">Eladás</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Amazon Inc. (AMZN)</td>
+                    <td id="amzn-price">Betöltés...</td>
+                    <td id="amzn-change">Betöltés...</td>
+                    <td>
+                        <button class="action-btn buy" onclick="buyStock('AMZN')">Vásárlás</button>
+                        <button class="action-btn sell" onclick="sellStock('AMZN')">Eladás</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Alphabet Inc. (GOOGL)</td>
+                    <td id="googl-price">Betöltés...</td>
+                    <td id="googl-change">Betöltés...</td>
+                    <td>
+                        <button class="action-btn buy" onclick="buyStock('GOOGL')">Vásárlás</button>
+                        <button class="action-btn sell" onclick="sellStock('GOOGL')">Eladás</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>Frissítés időpontja: <span id="update-time"></span></p>
+    </footer>
+
+    <script>
+        const apiKey = "cvgjsdpr01qjgp3ma2h0cvgjsdpr01qjgp3ma2hg"; 
+        const stocks = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOGL"]; 
+
+        async function fetchStockData() {
+            for (let stock of stocks) {
+                const url = `https://finnhub.io/api/v1/quote?symbol=${stock}&token=${apiKey}`;
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    if (data && data.c) {
+                        document.getElementById(`${stock.toLowerCase()}-price`).textContent = `${data.c.toFixed(2)} HUF`;
+                        const changeElement = document.getElementById(`${stock.toLowerCase()}-change`);
+                        changeElement.textContent = `${data.dp.toFixed(2)}%`;
+                        changeElement.className = data.dp >= 0 ? "up" : "down";
+                    } else {
+                        console.error(`Nincs megfelelő adat az API-tól (${stock})`);
+                    }
+                } catch (error) {
+                    console.error(`Hiba történt az API-hívás során (${stock}):`, error);
+                }
+            }
+            document.getElementById("update-time").textContent = new Date().toLocaleTimeString();
+        }
+
+        function buyStock(stock) {
+            alert(`Vásároltál egy ${stock} részvényt!`);
+        }
+
+        function sellStock(stock) {
+            alert(`Eladtál egy ${stock} részvényt!`);
+        }
+
+        fetchStockData();
+        setInterval(fetchStockData, 180000);
+    </script>
+</body>
+</html>
